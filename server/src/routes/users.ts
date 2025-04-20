@@ -87,9 +87,9 @@ export async function userRoutes(app: FastifyInstance) {
     });
   });
 
-  // ME route
+  // Get current user profile
   // GET /api/users/me
-  app.get("/me", { preHandler: verifyJWT }, async (request, reply) => {
-    return reply.send({ message: "User authenticated" });
-  });
+
+  // Update current user profile
+  // PATCH /api/users/me
 }
