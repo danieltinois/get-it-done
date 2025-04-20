@@ -32,9 +32,13 @@ const Login = () => {
         "http://localhost:3333/api/users/login",
         data
       );
-      const { token } = response.data.token;
+      const token = response.data.token;
+
+      console.log("RESPOSTA LOGIN: ", response.data);
 
       localStorage.setItem("token", token);
+
+      console.log("TOKEN SALVO:", localStorage.getItem("token"));
       toast.success("Login realizado com sucesso!");
       navigate("/dashboard");
     } catch (error) {

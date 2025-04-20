@@ -7,7 +7,9 @@ import { taskRoutes } from "./routes/tasks";
 const app = fastify();
 
 app.register(fastifyCors, {
-  origin: true,
+  origin: "http://localhost:5173", // frontend
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // <– isso é crucial
+  allowedHeaders: ["Content-Type", "Authorization"],
 });
 app.register(userRoutes, { prefix: "/api/users" });
 app.register(taskRoutes, { prefix: "/api/tasks" });
