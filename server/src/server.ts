@@ -1,10 +1,14 @@
 import "dotenv/config";
 import fastify from "fastify";
+import fastifyCors from "@fastify/cors";
 import { userRoutes } from "./routes/users";
 import { taskRoutes } from "./routes/tasks";
 
 const app = fastify();
 
+app.register(fastifyCors, {
+  origin: true,
+});
 app.register(userRoutes, { prefix: "/api/users" });
 app.register(taskRoutes, { prefix: "/api/tasks" });
 

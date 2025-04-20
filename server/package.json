@@ -13,6 +13,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@fastify/cors": "^11.0.1",
     "@prisma/client": "^6.6.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.5.0",
