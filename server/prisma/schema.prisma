@@ -14,23 +14,59 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  email      String   @unique
-  password   String
-  name       String?
-  bio        String?
-  avatarUrl  String?
-  createdAt  DateTime @default(now())
-  tasks      Task[]
+  id          String         @id @default(uuid())
+  name        String
+  email       String         @unique
+  password    String
+  avatarUrl   String?
+  bio         String?
+
+  tasks       Task[]         @relation("UserTasks")
+  groups      Group[]        @relation("OwnedGroups")
+  memberships GroupMember[]
+}
+
+model Group {
+  id        String         @id @default(uuid())
+  name      String
+  shareCode String         @unique
+  ownerId   String
+  owner     User           @relation("OwnedGroups", fields: [ownerId], references: [id])
+  members   GroupMember[]
+  folders   Folder[]
+}
+
+model GroupMember {
+  id      String   @id @default(uuid())
+  userId  String
+  groupId String
+
+  user    User     @relation(fields: [userId], references: [id])
+  group   Group    @relation(fields: [groupId], references: [id])
+
+  @@unique([userId, groupId])
+}
+
+model Folder {
+  id      String   @id @default(uuid())
+  name    String
+  groupId String
+
+  group   Group    @relation(fields: [groupId], references: [id])
+  tasks   Task[]
 }
 
 model Task {
-  id String @id @default(uuid())
-  title String
+  id          String    @id @default(uuid())
+  title       String
   description String?
-  status String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId String
-  user User @relation(fields: [userId], references: [id])
+  status      String    @default("PENDING")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  folderId    String?
+  folder      Folder?   @relation(fields: [folderId], references: [id])
+
+  userId      String
+  user        User      @relation("UserTasks", fields: [userId], references: [id])
 }

@@ -8,6 +8,8 @@ import { verifyJWT } from "./middleware/verifyJWT";
 import fastifyStatic from "@fastify/static";
 import path from "path";
 import uploadsRoutes from "./routes/uploads";
+import { groupRoutes } from "./routes/groups";
+import { folderRoutes } from "./routes/folders";
 const app = fastify();
 
 app.register(fastifyCors, {
@@ -17,6 +19,8 @@ app.register(fastifyCors, {
 });
 app.register(userRoutes, { prefix: "/api/users" });
 app.register(taskRoutes, { prefix: "/api/tasks" });
+app.register(groupRoutes, { prefix: "/api/groups", preHandler: verifyJWT });
+app.register(folderRoutes, { prefix: "/api/folders", preHandler: verifyJWT });
 app.register(fastifyStatic, {
   root: path.join(process.cwd(), "uploads"),
   prefix: "/uploads/", // serve as imagens

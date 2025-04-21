@@ -10,13 +10,15 @@ export async function taskRoutes(app: FastifyInstance) {
   app.post("/", { preHandler: verifyJWT }, async (request, reply) => {
     const bodySchema = z.object({
       title: z.string(),
-      description: z.string(),
+      description: z.string().optional(),
       status: z.enum(["PENDING", "IN_PROGRESS", "COMPLETED"]),
+      folderId: z.string().optional(), // adicionado
     });
 
-    const { title, description, status } = bodySchema.parse(request.body);
+    const { title, description, status, folderId } = bodySchema.parse(
+      request.body
+    );
 
-    // Get the user ID from the JWT token
     const userId = (request.user as any).sub;
 
     const task = await prisma.task.create({
@@ -24,6 +26,7 @@ export async function taskRoutes(app: FastifyInstance) {
         title,
         description,
         status,
+        folderId,
         userId,
       },
     });
@@ -34,7 +37,6 @@ export async function taskRoutes(app: FastifyInstance) {
   });
 
   // Update a task
-
   app.put("/:id", { preHandler: verifyJWT }, async (request, reply) => {
     const paramsSchema = z.object({
       id: z.string().uuid(),
@@ -121,4 +123,26 @@ export async function taskRoutes(app: FastifyInstance) {
 
     return reply.status(200).send({ tasks: task });
   });
+
+  // Get tasks by folder
+  app.get(
+    "/folder/:folderId",
+    { preHandler: verifyJWT },
+    async (request, reply) => {
+      const { folderId } = request.params as { folderId: string };
+      const userId = (request.user as any).sub;
+
+      const tasks = await prisma.task.findMany({
+        where: {
+          folderId,
+          userId,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+
+      return reply.send({ tasks });
+    }
+  );
 }
