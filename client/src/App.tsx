@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import { Toaster } from "react-hot-toast";
 import { ProtectedRoute } from "./routes/protectedRoute";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -21,6 +22,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />
