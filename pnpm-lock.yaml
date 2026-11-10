@@ -169,6 +169,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.6.6
         version: 2.6.6
+      git-validator-cli:
+        specifier: 0.26.2
+        version: 0.26.2
 
   apps/api:
     dependencies:
@@ -1960,6 +1963,10 @@ packages:
 
   giget@2.0.0:
     resolution: {integrity: sha512-L5bGsVkxJbJgdnwyuheIunkGatUF/zssUoxxjACCseZYAVbaqdh9Tsmmlkl8vYan09H7sbvKt4pS8GqKLBrEzA==}
+    hasBin: true
+
+  git-validator-cli@0.26.2:
+    resolution: {integrity: sha512-1tK9/ywwHOpiAT3w89poZplB4U3oCKW/jL3SfufGhZEBUhZjw/UZmVrxC8vDWbpllcjgS+SIg9y/oiiRHBpVRw==}
     hasBin: true
 
   glob-parent@6.0.2:
@@ -4304,6 +4311,8 @@ snapshots:
       node-fetch-native: 1.6.7
       nypm: 0.6.12
       pathe: 2.0.3
+
+  git-validator-cli@0.26.2: {}
 
   glob-parent@6.0.2:
     dependencies:
