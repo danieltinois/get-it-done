@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
+import { groupAccessibleBy } from "../authorization";
 import { verifyJWT } from "../middleware/verifyJWT";
 
 const prisma = new PrismaClient();
@@ -18,6 +19,16 @@ export async function taskRoutes(app: FastifyInstance) {
     const { title, description, status, folderId } = bodySchema.parse(request.body);
 
     const userId = request.user.sub;
+
+    if (folderId) {
+      const folder = await prisma.folder.findFirst({
+        where: { id: folderId, group: groupAccessibleBy(userId) },
+        select: { id: true },
+      });
+      if (!folder) {
+        return reply.status(404).send({ message: "Folder not found" });
+      }
+    }
 
     const task = await prisma.task.create({
       data: {

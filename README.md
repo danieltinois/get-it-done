@@ -74,8 +74,7 @@ Kept here until each one has a fix:
 
 - Invalid request bodies answer `500` instead of `400`: zod errors have no error handler.
 - Each route file creates its own `PrismaClient`.
-- `POST /api/uploads/avatars` has no auth, does not wait for the file to finish writing,
-  and returns a URL with port `3333` hard-coded.
+- Deleting a group that still has folders fails with `500`: the relations have no `onDelete` rule.
 - Most web components call the API with hard-coded URLs instead of `src/services/api.ts`.
-- Group share codes come from `Math.random`, and `Task.status` is a free string in the database.
+- `Task.status` is a free string in the database.
 - The web app ships two toast libraries (`react-hot-toast` and `react-toastify`).
