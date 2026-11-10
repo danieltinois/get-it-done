@@ -34,8 +34,12 @@ const DeleteTaskForm = ({ isOpen, onClose, onConfirm }: Props) => {
             </S.Info>
 
             <S.Actions>
-              <button onClick={onConfirm}>Sim, excluir</button>
-              <button onClick={onClose}>Cancelar</button>
+              <button type="button" onClick={onConfirm}>
+                Sim, excluir
+              </button>
+              <button type="button" onClick={onClose}>
+                Cancelar
+              </button>
             </S.Actions>
           </S.Content>
         </S.Wrapper>

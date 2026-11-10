@@ -49,7 +49,7 @@ const NewTaskForm = ({ onClose, onSuccess }: Props) => {
   const autoResizeTextArea = (el: HTMLTextAreaElement | null) => {
     if (!el) return;
     el.style.height = "auto";
-    el.style.height = el.scrollHeight + "px";
+    el.style.height = `${el.scrollHeight}px`;
   };
 
   return (

@@ -4,7 +4,6 @@ import type { FastifyInstance } from "fastify";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
 import { env } from "../env";
-import { verifyJWT } from "../middleware/verifyJWT";
 
 const prisma = new PrismaClient();
 

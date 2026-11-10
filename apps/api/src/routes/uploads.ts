@@ -1,15 +1,14 @@
+import { randomUUID } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { randomUUID } from "crypto";
 import type { FastifyInstance } from "fastify";
-import fp from "fastify-plugin";
 
 export default async function uploadsRoutes(app: FastifyInstance) {
   app.register(import("@fastify/multipart"));
 
   app.post("/avatars", async (req, reply) => {
     const file = await req.file();
-    if (!file || !file.mimetype.startsWith("image/")) {
+    if (!file?.mimetype.startsWith("image/")) {
       return reply.status(400).send({ error: "Só imagens, por favor" });
     }
 

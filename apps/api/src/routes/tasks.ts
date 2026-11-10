@@ -17,7 +17,7 @@ export async function taskRoutes(app: FastifyInstance) {
 
     const { title, description, status, folderId } = bodySchema.parse(request.body);
 
-    const userId = (request.user as any).sub;
+    const userId = request.user.sub;
 
     const task = await prisma.task.create({
       data: {
@@ -47,7 +47,7 @@ export async function taskRoutes(app: FastifyInstance) {
     const { id } = paramsSchema.parse(request.params);
     const { title, description, status } = bodySchema.parse(request.body);
 
-    const userId = (request.user as any).sub;
+    const userId = request.user.sub;
 
     const task = await prisma.task.findUnique({
       where: {
@@ -83,7 +83,7 @@ export async function taskRoutes(app: FastifyInstance) {
     });
 
     const { id } = paramsSchema.parse(request.params);
-    const userId = (request.user as any).sub;
+    const userId = request.user.sub;
 
     const task = await prisma.task.findUnique({
       where: {
@@ -106,7 +106,7 @@ export async function taskRoutes(app: FastifyInstance) {
 
   // Get all tasks for a user
   app.get("/", { preHandler: verifyJWT }, async (request, reply) => {
-    const userId = (request.user as any).sub;
+    const userId = request.user.sub;
 
     const task = await prisma.task.findMany({
       where: {
@@ -123,7 +123,7 @@ export async function taskRoutes(app: FastifyInstance) {
   // Get tasks by folder
   app.get("/folder/:folderId", { preHandler: verifyJWT }, async (request, reply) => {
     const { folderId } = request.params as { folderId: string };
-    const userId = (request.user as any).sub;
+    const userId = request.user.sub;
 
     const tasks = await prisma.task.findMany({
       where: {

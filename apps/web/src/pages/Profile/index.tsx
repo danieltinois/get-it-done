@@ -33,7 +33,7 @@ const Profile = () => {
       setValue("bio", data.user.bio ?? "");
       setPreview(data.user.avatarUrl ?? null);
     })();
-  }, []);
+  }, [setValue]);
 
   const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

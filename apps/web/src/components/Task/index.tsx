@@ -34,7 +34,7 @@ const Task = ({ task, onRefresh }: Props) => {
       });
       toast.success("Tarefa excluída com sucesso");
       onRefresh();
-    } catch (err) {
+    } catch {
       toast.error("Erro ao excluir a tarefa");
     } finally {
       setShowDeleteModal(false);

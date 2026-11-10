@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import NewTaskForm from "../../components/NewTaskForm";
 import TaskItem from "../../components/Task";
 import * as S from "./styled";
@@ -17,7 +17,7 @@ const Dashboard = () => {
   const [tasks, setTasks] = useState<Tasks[]>([]);
   const [showForm, setShowForm] = useState(false);
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get("http://localhost:3333/api/tasks", {
@@ -29,11 +29,11 @@ const Dashboard = () => {
     } catch (error) {
       console.error("Erro ao buscar tarefas: ", error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
 
   return (
     <S.Container>

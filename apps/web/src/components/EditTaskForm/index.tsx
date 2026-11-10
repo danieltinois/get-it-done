@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as Dialog from "@radix-ui/react-dialog";
 import axios from "axios";
 import { motion } from "framer-motion";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
@@ -35,7 +35,7 @@ const EditTaskForm = ({ task, onClose, onSuccess }: Props) => {
     setValue("title", task.title);
     setValue("description", task.description);
     setValue("status", task.status as FormData["status"]);
-  }, [task]);
+  }, [task, setValue]);
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -59,7 +59,7 @@ const EditTaskForm = ({ task, onClose, onSuccess }: Props) => {
   const autoResizeTextArea = (el: HTMLTextAreaElement | null) => {
     if (!el) return;
     el.style.height = "auto";
-    el.style.height = el.scrollHeight + "px";
+    el.style.height = `${el.scrollHeight}px`;
   };
 
   return (

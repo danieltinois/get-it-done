@@ -8,3 +8,6 @@ coverage
 .env
 .env.*
 !.env.example
+
+# Personal Claude Code settings
+.claude/settings.local.json

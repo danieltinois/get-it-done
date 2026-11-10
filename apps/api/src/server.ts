@@ -1,7 +1,7 @@
+import path from "node:path";
 import fastifyCors from "@fastify/cors";
 import fastifyStatic from "@fastify/static";
 import fastify from "fastify";
-import path from "path";
 import { env } from "./env";
 import { verifyJWT } from "./middleware/verifyJWT";
 import { folderRoutes } from "./routes/folders";
