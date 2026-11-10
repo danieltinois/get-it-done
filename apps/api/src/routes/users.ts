@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import jwt from "jsonwebtoken";
 import { verifyJWT } from "../middleware/verifyJWT";
+import { env } from "../env";
 
 const prisma = new PrismaClient();
 
@@ -75,7 +76,7 @@ export async function userRoutes(app: FastifyInstance) {
         name: user.name,
         email: user.email,
       },
-      process.env.JWT_SECRET!,
+      env.JWT_SECRET,
       {
         expiresIn: "15m",
       }

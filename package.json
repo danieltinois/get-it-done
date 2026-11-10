@@ -9,6 +9,8 @@
     "dev": "pnpm --parallel --recursive run dev",
     "dev:api": "pnpm --filter @get-it-done/api run dev",
     "dev:web": "pnpm --filter @get-it-done/web run dev",
-    "build": "pnpm --recursive run build"
+    "build": "pnpm --recursive run build",
+    "db:up": "docker compose up -d --wait db",
+    "db:migrate": "pnpm --filter @get-it-done/api exec prisma migrate dev"
   }
 }

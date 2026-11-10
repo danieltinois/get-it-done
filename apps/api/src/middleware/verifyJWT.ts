@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import jwt from "jsonwebtoken";
+import { env } from "../env";
 
 declare module "fastify" {
   interface FastifyRequest {
@@ -17,7 +18,7 @@ export async function verifyJWT(request: FastifyRequest, reply: FastifyReply) {
   const token = authHeader.replace("Bearer ", "");
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+    const decoded = jwt.verify(token, env.JWT_SECRET);
     request.user = decoded;
   } catch (error) {
     return reply.status(401).send({ message: "Invalid token" });
