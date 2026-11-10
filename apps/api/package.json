@@ -1,16 +1,11 @@
 {
-  "name": "server",
+  "name": "@get-it-done/api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "postinstall": "prisma generate",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "tsc --noEmit",
+    "postinstall": "prisma generate"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "type": "commonjs",
   "dependencies": {
     "@fastify/cors": "^11.0.1",
@@ -20,6 +15,7 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.5.0",
     "fastify": "^5.3.2",
+    "fastify-plugin": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "prisma": "^6.6.0",
     "uuid": "^11.1.0",
@@ -31,5 +27,6 @@
     "@types/node": "^22.14.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"
-  }
+  },
+  "private": true
 }

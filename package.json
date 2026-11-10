@@ -1,0 +1,14 @@
+{
+  "name": "get-it-done",
+  "private": true,
+  "packageManager": "pnpm@12.16.1",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --recursive run dev",
+    "dev:api": "pnpm --filter @get-it-done/api run dev",
+    "dev:web": "pnpm --filter @get-it-done/web run dev",
+    "build": "pnpm --recursive run build"
+  }
+}

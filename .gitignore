@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+*.log
+.DS_Store
+
+# Environment variables stay out of Git; .env.example documents them
+.env
+.env.*
+!.env.example
