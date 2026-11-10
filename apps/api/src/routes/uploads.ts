@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
-import fp from "fastify-plugin";
 import { randomUUID } from "crypto";
-import { FastifyInstance } from "fastify";
+import type { FastifyInstance } from "fastify";
+import fp from "fastify-plugin";
 
 export default async function uploadsRoutes(app: FastifyInstance) {
   app.register(import("@fastify/multipart"));

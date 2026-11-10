@@ -1,15 +1,14 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+import Button from "../../components/Button";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
-import Button from "../../components/Button";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-import * as S from "./styled";
-import toast from "react-hot-toast";
 import SmallLink from "../../components/SmallLink";
+import * as S from "./styled";
 
 const loginSchema = z.object({
   email: z.string().email("E-mail inválido"),
@@ -28,10 +27,7 @@ const Login = () => {
 
   const handleLogin = async (data: LoginFormData) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3333/api/users/login",
-        data
-      );
+      const response = await axios.post("http://localhost:3333/api/users/login", data);
       const token = response.data.token;
 
       console.log("RESPOSTA LOGIN: ", response.data);

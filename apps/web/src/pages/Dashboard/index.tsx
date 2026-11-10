@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import TaskItem from "../../components/Task";
 import axios from "axios";
-import * as S from "./styled";
+import { useEffect, useState } from "react";
 import NewTaskForm from "../../components/NewTaskForm";
+import TaskItem from "../../components/Task";
+import * as S from "./styled";
 
 interface Tasks {
   id: string;
@@ -39,15 +39,8 @@ const Dashboard = () => {
     <S.Container>
       <S.Header>
         <h1>Suas Tarefas</h1>
-        <S.NewTaskButton onClick={() => setShowForm(true)}>
-          Nova tarefa
-        </S.NewTaskButton>
-        {showForm && (
-          <NewTaskForm
-            onClose={() => setShowForm(false)}
-            onSuccess={fetchTasks}
-          />
-        )}
+        <S.NewTaskButton onClick={() => setShowForm(true)}>Nova tarefa</S.NewTaskButton>
+        {showForm && <NewTaskForm onClose={() => setShowForm(false)} onSuccess={fetchTasks} />}
       </S.Header>
 
       <S.TaskList>

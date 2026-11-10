@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { FastifyInstance } from "fastify";
+import type { FastifyInstance } from "fastify";
 import { z } from "zod";
 import { verifyJWT } from "../middleware/verifyJWT";
 

@@ -1,15 +1,14 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+import Button from "../../components/Button";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
-import Button from "../../components/Button";
 import SmallLink from "../../components/SmallLink";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-
 import * as S from "./styled";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import toast from "react-hot-toast";
 
 const schema = z.object({
   name: z.string().min(2, "Nome obrigatório"),

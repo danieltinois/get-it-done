@@ -23,11 +23,7 @@ export const TaskStatus = styled.span<{ status: string }>`
   margin-top: 0.5rem;
   padding: 0.25rem 0.5rem;
   background: ${({ status }) =>
-    status === "COMPLETED"
-      ? "#28a745"
-      : status === "IN_PROGRESS"
-      ? "#ffc107"
-      : "#6c757d"};
+    status === "COMPLETED" ? "#28a745" : status === "IN_PROGRESS" ? "#ffc107" : "#6c757d"};
   color: white;
   font-size: 0.75rem;
   border-radius: 4px;

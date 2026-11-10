@@ -1,6 +1,6 @@
-import { FastifyInstance } from "fastify";
-import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
+import type { FastifyInstance } from "fastify";
+import { z } from "zod";
 import { verifyJWT } from "../middleware/verifyJWT";
 
 const prisma = new PrismaClient();
@@ -15,9 +15,7 @@ export async function taskRoutes(app: FastifyInstance) {
       folderId: z.string().optional(), // adicionado
     });
 
-    const { title, description, status, folderId } = bodySchema.parse(
-      request.body
-    );
+    const { title, description, status, folderId } = bodySchema.parse(request.body);
 
     const userId = (request.user as any).sub;
 
@@ -31,9 +29,7 @@ export async function taskRoutes(app: FastifyInstance) {
       },
     });
 
-    return reply
-      .status(201)
-      .send({ message: "Task created successfully", task });
+    return reply.status(201).send({ message: "Task created successfully", task });
   });
 
   // Update a task
@@ -125,24 +121,20 @@ export async function taskRoutes(app: FastifyInstance) {
   });
 
   // Get tasks by folder
-  app.get(
-    "/folder/:folderId",
-    { preHandler: verifyJWT },
-    async (request, reply) => {
-      const { folderId } = request.params as { folderId: string };
-      const userId = (request.user as any).sub;
+  app.get("/folder/:folderId", { preHandler: verifyJWT }, async (request, reply) => {
+    const { folderId } = request.params as { folderId: string };
+    const userId = (request.user as any).sub;
 
-      const tasks = await prisma.task.findMany({
-        where: {
-          folderId,
-          userId,
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      });
+    const tasks = await prisma.task.findMany({
+      where: {
+        folderId,
+        userId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
-      return reply.send({ tasks });
-    }
-  );
+    return reply.send({ tasks });
+  });
 }

@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import * as Dialog from "@radix-ui/react-dialog";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   position: fixed;

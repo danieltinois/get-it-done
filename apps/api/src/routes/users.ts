@@ -1,10 +1,10 @@
-import { FastifyInstance } from "fastify";
-import { z } from "zod";
-import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
+import type { FastifyInstance } from "fastify";
 import jwt from "jsonwebtoken";
-import { verifyJWT } from "../middleware/verifyJWT";
+import { z } from "zod";
 import { env } from "../env";
+import { verifyJWT } from "../middleware/verifyJWT";
 
 const prisma = new PrismaClient();
 
@@ -79,7 +79,7 @@ export async function userRoutes(app: FastifyInstance) {
       env.JWT_SECRET,
       {
         expiresIn: "15m",
-      }
+      },
     );
 
     return reply.status(200).send({

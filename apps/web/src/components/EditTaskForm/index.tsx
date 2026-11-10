@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
-import { motion } from "framer-motion";
-import Task from "../Task";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import toast from "react-hot-toast";
-import axios from "axios";
-
-import * as S from "./styled";
 import * as Dialog from "@radix-ui/react-dialog";
+import axios from "axios";
+import { motion } from "framer-motion";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { z } from "zod";
+import type Task from "../Task";
+import * as S from "./styled";
 
 const schema = z.object({
   title: z.string().min(3),

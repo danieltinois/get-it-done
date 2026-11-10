@@ -1,15 +1,16 @@
-import { env } from "./env";
-import fastify from "fastify";
 import fastifyCors from "@fastify/cors";
-import { userRoutes } from "./routes/users";
-import { taskRoutes } from "./routes/tasks";
-import { profileRoutes } from "./routes/profile";
-import { verifyJWT } from "./middleware/verifyJWT";
 import fastifyStatic from "@fastify/static";
+import fastify from "fastify";
 import path from "path";
-import uploadsRoutes from "./routes/uploads";
-import { groupRoutes } from "./routes/groups";
+import { env } from "./env";
+import { verifyJWT } from "./middleware/verifyJWT";
 import { folderRoutes } from "./routes/folders";
+import { groupRoutes } from "./routes/groups";
+import { profileRoutes } from "./routes/profile";
+import { taskRoutes } from "./routes/tasks";
+import uploadsRoutes from "./routes/uploads";
+import { userRoutes } from "./routes/users";
+
 const app = fastify();
 
 app.register(fastifyCors, {

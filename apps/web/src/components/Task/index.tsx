@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { TbPencil, TbTrash } from "react-icons/tb";
-
-import * as S from "./styled";
-import EditTaskForm from "../EditTaskForm";
 import axios from "axios";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { TbPencil, TbTrash } from "react-icons/tb";
 import DeleteTaskForm from "../DeleteTaskForm";
+import EditTaskForm from "../EditTaskForm";
+import * as S from "./styled";
 
 interface Task {
   id: string;
@@ -46,39 +45,27 @@ const Task = ({ task, onRefresh }: Props) => {
     <>
       <S.TaskCard>
         <S.TaskTitle>{task.title}</S.TaskTitle>
-        {task.description && (
-          <S.TaskDescription>{task.description}</S.TaskDescription>
-        )}
+        {task.description && <S.TaskDescription>{task.description}</S.TaskDescription>}
         <S.TaskStatus status={task.status}>
           {task.status === "COMPLETED"
             ? "Concluída"
             : task.status === "IN_PROGRESS"
-            ? "Em andamento"
-            : "Pendente"}
+              ? "Em andamento"
+              : "Pendente"}
         </S.TaskStatus>
 
         <S.TaskActions>
-          <S.EditButton
-            onClick={() => setShowEditModal(true)}
-            aria-label="Editar tarefa"
-          >
+          <S.EditButton onClick={() => setShowEditModal(true)} aria-label="Editar tarefa">
             <TbPencil size={20} />
           </S.EditButton>
-          <S.DeleteButton
-            onClick={() => setShowDeleteModal(true)}
-            aria-label="Deletar tarefa"
-          >
+          <S.DeleteButton onClick={() => setShowDeleteModal(true)} aria-label="Deletar tarefa">
             <TbTrash size={20} />
           </S.DeleteButton>
         </S.TaskActions>
       </S.TaskCard>
 
       {showEditModal && (
-        <EditTaskForm
-          task={task}
-          onClose={() => setShowEditModal(false)}
-          onSuccess={onRefresh}
-        />
+        <EditTaskForm task={task} onClose={() => setShowEditModal(false)} onSuccess={onRefresh} />
       )}
 
       {showDeleteModal && (

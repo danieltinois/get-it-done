@@ -1,12 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-
-import * as S from "./styled";
+import type React from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { z } from "zod";
 import api from "../../services/api";
+import * as S from "./styled";
 
 const schema = z.object({
   name: z.string().min(2, "Mín. 2 caracteres").max(50),

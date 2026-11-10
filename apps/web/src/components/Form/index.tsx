@@ -1,4 +1,4 @@
-import { FormHTMLAttributes, ReactNode } from "react";
+import type { FormHTMLAttributes, ReactNode } from "react";
 import * as S from "./styled";
 
 interface FormProps extends FormHTMLAttributes<HTMLFormElement> {

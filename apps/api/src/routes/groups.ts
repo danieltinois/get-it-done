@@ -1,6 +1,6 @@
-import { FastifyInstance } from "fastify";
-import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
+import type { FastifyInstance } from "fastify";
+import { z } from "zod";
 import { verifyJWT } from "../middleware/verifyJWT";
 
 const prisma = new PrismaClient();
