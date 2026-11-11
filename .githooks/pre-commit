@@ -1,0 +1,5 @@
+#!/bin/sh
+# Lints and checks formatting of the staged files only, so commits stay fast.
+# Run `pnpm format` to apply the fixes Biome can make on its own.
+
+exec pnpm exec biome check --staged --no-errors-on-unmatched

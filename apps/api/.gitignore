@@ -1,0 +1,5 @@
+node_modules
+
+# Files sent by users at runtime
+uploads/*
+!uploads/.gitkeep

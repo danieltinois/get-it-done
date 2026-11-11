@@ -1,0 +1,17 @@
+#!/bin/sh
+# Enforces Conventional Commits and rejects AI attribution (see CLAUDE.md).
+
+message_file="$1"
+subject=$(grep -v '^#' "$message_file" | head -n 1)
+
+pnpm exec git-validator-cli commit "$subject" || exit 1
+
+ai='claude|anthropic|openai|chatgpt|gpt-[0-9]|copilot|codex|gemini|cursor|devin|\[bot\]'
+
+if grep -v '^#' "$message_file" | grep -Eiq \
+    -e "^co-authored-by:.*($ai)" \
+    -e "generated (with|by) .*($ai)" \
+    -e 'claude\.ai/code'; then
+  echo "commit-msg: the message carries AI attribution, which this repository forbids (CLAUDE.md)." >&2
+  exit 1
+fi

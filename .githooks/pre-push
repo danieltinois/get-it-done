@@ -1,0 +1,25 @@
+#!/bin/sh
+# Enforces Git Flow branch names and blocks direct pushes to main.
+
+zero=0000000000000000000000000000000000000000
+status=0
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$remote_ref" in
+    refs/heads/*) branch=${remote_ref#refs/heads/} ;;
+    *) continue ;;
+  esac
+
+  # Deleting a remote branch is not a push of new work.
+  [ "$local_sha" = "$zero" ] && continue
+
+  if [ "$branch" = "main" ]; then
+    echo "pre-push: direct push to main is blocked. Push a Git Flow branch and open a PR." >&2
+    status=1
+    continue
+  fi
+
+  pnpm exec git-validator-cli branch "$branch" || status=1
+done
+
+exit $status
